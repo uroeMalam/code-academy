@@ -58,6 +58,7 @@ module.exports = {
     ensureSeller: ensureSeller,
     refreshToken : refreshToken,
     logout: logout,
+    passwordConverter:passwordConverter,
     verify: verifyToken
 }
 
@@ -144,6 +145,27 @@ async function refreshToken(req, res) {
         console.log(log)
     }
 }
+
+// generate password
+async function passwordConverter(req, res){
+    try {
+        const originalPassword = req.body.password
+
+        // untuk hashing nanti
+        const SALT_ROUND = 10; // untuk cost faktor, cost-factor = 10 = 2^10 iterations
+        const BCryptPassword = await bcrypt.hash(originalPassword, SALT_ROUND); //mengubah string menjadi hash
+
+
+        return res.status(200).json({
+            message:"Converted Completed",
+            OriginalPassword:originalPassword,
+            BCryptPassword:BCryptPassword
+        })
+    } catch (err) {
+        return res.status(401).json({message:"something wrong .."})
+    }
+}
+
 
 // punya kak naufal
 // async function refreshToken(req, res) {

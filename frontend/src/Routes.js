@@ -43,7 +43,7 @@ export default function Routes(isLoggedIn) {
     },
     {
       path: '/app',
-      element:  <AppLayout/>,
+      element:   isLoggedIn ? <AppLayout/> : <Navigate to="/auth/signin"/>,
       children: [
         // { path: 'dashboard', element:<Dashboard/>},
         // { path: 'candidat', element:<Candidat/> },

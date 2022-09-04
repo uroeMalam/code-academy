@@ -17,4 +17,7 @@ router.post("/signinAction",IndexController.UserController.signin);
 router.post("/loginTest",IndexController.UserController.signin);
 //router.post("/refreshtoken",authJWT.refreshToken)
 
+// generate password
+router.post("/bcrypt",authJWT.passwordConverter);
+
 export default router;
